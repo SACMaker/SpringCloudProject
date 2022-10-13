@@ -11,6 +11,8 @@ spring:
   cloud:
     nacos:
       server-addr: localhost:8848
+      discovery:
+        cluster-name: HZ # 集群名称
 #eureka服务发现
 #eureka:
 #  client:
@@ -32,6 +34,10 @@ logging:
 #  ribbon:
 #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule # 负载均衡规则
 
+#添加nacos负载均衡,实现同集群优先的负载均衡
+userservice:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule # 负载均衡规则
 #配置饥饿加载
 ribbon:
   eager-load:
