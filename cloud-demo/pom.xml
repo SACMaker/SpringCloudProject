@@ -7,6 +7,7 @@
     <groupId>cn.itcast.demo</groupId>
     <artifactId>cloud-demo</artifactId>
     <version>1.0</version>
+    <!--子模块-->
     <modules>
         <module>user-service</module>
         <module>order-service</module>
@@ -14,7 +15,7 @@
     </modules>
 
     <packaging>pom</packaging>
-
+    <!--springcloud模块-version2.3.9-->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -52,6 +53,14 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis.version}</version>
+            </dependency>
+            <!--SpringCloudAlibaba的管理依赖-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.2.6.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
