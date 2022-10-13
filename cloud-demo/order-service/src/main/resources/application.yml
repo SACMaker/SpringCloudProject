@@ -13,6 +13,7 @@ spring:
       server-addr: localhost:8848
       discovery:
         cluster-name: HZ # 集群名称
+        #namespace: ba8d7557-27ff-4362-962f-105b55f08202 #命名空间(填写命名空间id)
 #eureka服务发现
 #eureka:
 #  client:
