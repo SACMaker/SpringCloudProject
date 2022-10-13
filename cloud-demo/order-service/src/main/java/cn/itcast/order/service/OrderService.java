@@ -24,8 +24,11 @@ public class OrderService {
         Order order = orderMapper.findById(orderId);
         //2.RPC user
         //2.1调用的url
-        String url = "http://localhost:8081/user/" + order.getUserId();
-        log.info("url:{}", url);
+        //String url = "http://localhost:8081/user/" + order.getUserId();
+        //2.1在eureka注册中心服务器进行服务的拉取
+        //按照注册到eureka的服务名字进行拉取的
+        String url = "http://userservice/user/" + order.getUserId();
+        // log.info("url:{}", url);
         //2.2发起调用
         User User = restTemplate.getForObject(url, User.class);
         //把RPC查询到的User数据存近Order
