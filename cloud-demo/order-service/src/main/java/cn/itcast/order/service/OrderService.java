@@ -1,13 +1,12 @@
 package cn.itcast.order.service;
 
-import cn.itcast.order.feignclient.UserClient;
+import cn.itcast.feignapi.feignclients.UserClient;;
+import cn.itcast.feignapi.pojo.User;
 import cn.itcast.order.mapper.OrderMapper;
 import cn.itcast.order.pojo.Order;
-import cn.itcast.order.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @Service
@@ -35,10 +34,10 @@ public class OrderService {
         //2.2发起调用
         //User User = restTemplate.getForObject(url, User.class);
         //FeignClient写法
-        User User = userClient.findById(order.getUserId());
+        User user = userClient.findById(order.getUserId());
         // log.info("url:{}", url);
         //把RPC查询到的User数据存近Order
-        order.setUser(User);
+        order.setUser(user);
         // 4.返回
         return order;
     }

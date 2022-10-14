@@ -1,4 +1,4 @@
-package cn.itcast.order.config;
+package cn.itcast.feignapi.config;
 
 import feign.Logger;
 import org.springframework.context.annotation.Bean;

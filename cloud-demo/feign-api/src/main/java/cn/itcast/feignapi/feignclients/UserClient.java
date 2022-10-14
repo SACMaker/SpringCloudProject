@@ -1,7 +1,7 @@
-package cn.itcast.order.feignclient;
+package cn.itcast.feignapi.feignclients;
 
-import cn.itcast.order.pojo.User;
-import org.apache.ibatis.annotations.Param;
+
+import cn.itcast.feignapi.pojo.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
