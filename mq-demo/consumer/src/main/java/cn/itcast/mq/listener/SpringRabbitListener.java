@@ -55,4 +55,24 @@ public class SpringRabbitListener {
     public void listenDirectQueue2(String msg){
         System.out.println("消费者接收到direct.queue2的消息：【" + msg + "】");
     }
+    //Topic就是带通配符的direct
+    //`#`：匹配一个或多个词
+    //`*`：匹配不多不少恰好1个词
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = "topic.queue1"),
+            exchange = @Exchange(name = "itcast.topic", type = ExchangeTypes.TOPIC),
+            key = "china.#"
+    ))
+    public void listenTopicQueue1(String msg){
+        System.out.println("消费者接收到topic.queue1的消息：【" + msg + "】");
+    }
+
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = "topic.queue2"),
+            exchange = @Exchange(name = "itcast.topic", type = ExchangeTypes.TOPIC),
+            key = "#.news"
+    ))
+    public void listenTopicQueue2(String msg){
+        System.out.println("消费者接收到topic.queue2的消息：【" + msg + "】");
+    }
 }
