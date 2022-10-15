@@ -57,4 +57,14 @@ public class SpringAmqpTest {
         String message = "hello, everyone!";
         rabbitTemplate.convertAndSend(exchangeName, "", message);
     }
+    //direct路由,发消息带路由key的,只有和交换机绑定的key中带发送消息的路由key才会被交换机路由消息到这个消息队列
+    @Test
+    public void testSendDirectExchange() {
+        // 交换机名称
+        String exchangeName = "itcast.direct";
+        // 消息
+        String message = "红色警报！日本乱排核废水，导致海洋生物变异，惊现哥斯拉！";
+        // 发送消息
+        rabbitTemplate.convertAndSend(exchangeName, "red", message);
+    }
 }
