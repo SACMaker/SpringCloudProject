@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringAmqpTest {
@@ -15,8 +18,8 @@ public class SpringAmqpTest {
     private RabbitTemplate rabbitTemplate;
 
     /**
-     *  BasicQueue 基本消息队列模型
-     *  一个提供者一个消费者
+     * BasicQueue 基本消息队列模型
+     * 一个提供者一个消费者
      */
     @Test
     public void testSimpleQueue() {
@@ -79,5 +82,18 @@ public class SpringAmqpTest {
         String message = "喜报！孙悟空大战哥斯拉，胜!";
         // 发送消息
         rabbitTemplate.convertAndSend(exchangeName, "china.news", message);
+    }
+
+    //测试默认的消息转换器,默认是jdk序列化
+    @Test
+    public void testSendMap() throws InterruptedException {
+        // 队列名称
+        String queueName = "simple.queue";
+        // 准备消息
+        Map<String, Object> msg = new HashMap<>();
+        msg.put("name", "Jack");
+        msg.put("age", 21);
+        // 发送消息
+        rabbitTemplate.convertAndSend(queueName, "", msg);
     }
 }
