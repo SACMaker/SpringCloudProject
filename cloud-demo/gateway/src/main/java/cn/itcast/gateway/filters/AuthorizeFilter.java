@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 /**
  * gateway自定义过滤器
  */
-@Component
+//@Component
 public class AuthorizeFilter implements GlobalFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {

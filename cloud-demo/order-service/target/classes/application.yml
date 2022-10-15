@@ -1,0 +1,59 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: orderservice
+  datasource:
+    url: jdbc:mysql://localhost:3306/cloud_order?useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      discovery:
+        cluster-name: HZ # 集群名称
+        #namespace: ba8d7557-27ff-4362-962f-105b55f08202 #命名空间(填写命名空间id)
+      #ephemeral: false #永久实例
+#eureka服务发现
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://127.0.0.1:10086/eureka
+mybatis:
+  type-aliases-package: cn.itcast.user.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+#mybatis查询语句的日志打印
+logging:
+  level:
+    cn.itcast: debug
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
+
+#注意默认不修改负载均衡策略
+#userservice: # 给某个微服务配置负载均衡规则，这里是userservice服务
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule # 负载均衡规则
+
+#添加nacos负载均衡,实现同集群优先的负载均衡
+userservice:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule # 负载均衡规则
+#配置饥饿加载
+ribbon:
+  eager-load:
+    enabled: true
+    clients: userservice #这里可以写数组,表示多个服务配置饥饿加载
+#openfeign的日志配置
+#feign:
+  #client:
+    #config:
+      #userservice: # 针对某个微服务的配置
+      #default: # 这里用default就是全局配置，如果是写服务名称，则是针对某个微服务的配置
+        #loggerLevel: FULL #  日志级别
+#配置OpenFeign连接池HttpClient
+httpclient:
+  enabled: true # 开启feign对HttpClient的支持
+  max-connections: 200 # 最大的连接数
+  max-connections-per-route: 50 # 每个路径的最大连接数
