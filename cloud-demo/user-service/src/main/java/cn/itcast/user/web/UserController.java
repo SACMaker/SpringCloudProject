@@ -50,7 +50,13 @@ public class UserController {
      * @return 用户
      */
     @GetMapping("/{id}")
-    public User queryById(@PathVariable("id") Long id) {
+    public User queryById(@PathVariable("id") Long id) throws InterruptedException {
+        if (id == 1) {
+            //id为1时，触发慢调用
+            Thread.sleep(60);
+        } else if (id == 2) {
+            throw new RuntimeException("故意抛出异常，触发异常比例熔断");
+        }
         return userService.queryById(id);
     }
 }

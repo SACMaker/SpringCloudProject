@@ -3,13 +3,12 @@ package cn.itcast.order.web;
 import cn.itcast.order.pojo.Order;
 import cn.itcast.order.service.OrderService;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+@Slf4j
 @RestController
 @RequestMapping("/order")
 public class OrderController {
@@ -19,7 +18,9 @@ public class OrderController {
 
     @SentinelResource("hot")//热点参数限流,包括全局和热点
     @GetMapping("/{orderId}")
-    public Order queryOrderByUserId(@PathVariable("orderId") Long orderId) {
+    public Order queryOrderByUserId(@PathVariable("orderId") Long orderId,
+                                    @RequestHeader(value = "origin", required = false) String origin) {
+        log.info("origin:{}", origin);
         // 根据id查询订单并返回
         return orderService.queryOrderById(orderId);
     }
