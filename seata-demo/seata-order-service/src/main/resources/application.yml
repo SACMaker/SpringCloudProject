@@ -1,8 +1,8 @@
 server:
-  port: 8083
+  port: 8082
 spring:
   application:
-    name: account-service
+    name: order-service
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql:///seata_demo?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
@@ -38,3 +38,4 @@ seata:
   service:
     vgroup-mapping: # 事务组与cluster的映射关系
       seata-demo: SH
+  data-source-proxy-mode: XA
