@@ -7,6 +7,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="seata-storage-service" />
+        <module name="seata-account-service" />
         <module name="publisher" />
         <module name="SpringCloudProject" />
         <module name="order-service" />
@@ -15,6 +17,7 @@
         <module name="feign-api" />
         <module name="gateway" />
         <module name="consumer" />
+        <module name="seata-order-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -30,6 +33,9 @@
       <module name="gateway" options="-parameters" />
       <module name="order-service" options="-parameters" />
       <module name="publisher" options="-parameters" />
+      <module name="seata-account-service" options="-parameters" />
+      <module name="seata-order-service" options="-parameters" />
+      <module name="seata-storage-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>
